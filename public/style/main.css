@@ -1,0 +1,281 @@
+/*
+ * Base / Global
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, .roboto {
+    font-family: "Roboto", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    color: #fff;
+}
+abbr {
+    text-decoration: none;
+}
+.center {
+    text-align: center;
+}
+
+/*
+ * Background Video + Overlay
+ */
+.video-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+.video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/*
+ * Header
+ */
+header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background: repeating-linear-gradient(-45deg, rgba(12, 12, 19, 0.6), rgba(12, 12, 19, 0.6) 10px, rgba(15, 15, 24, 0.6) 10px, rgba(15, 15, 24, 0.6) 20px), rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+}
+header h1 {
+    width: 168px;
+    height: 100px;
+    background: url("/images/single-player-tarkov.png") no-repeat center center / contain;
+    margin: 0;
+}
+header h1 a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-indent: -9999px;
+    outline: none;
+}
+
+/*
+ * Navigation
+ */
+nav {
+    margin-right: 1rem;
+}
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style-type: none;
+}
+nav li {
+    margin-left: 2rem;
+    position: relative;
+}
+nav li:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    transition: all 0.3s ease;
+    bottom: -0.10rem;
+}
+nav li:hover::after {
+    width: 100%;
+    height: 2px;
+    background-color: #ffc107;
+}
+nav a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+nav a:hover,
+nav a:focus {
+    text-decoration: none;
+    color: #ffc107;
+}
+
+/*
+ * Main Content
+ */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+section {
+    display: none;
+    margin: 2rem auto;
+    text-align: center;
+    background: repeating-linear-gradient(-45deg, rgba(12, 12, 19, 0.6), rgba(12, 12, 19, 0.6) 10px, rgba(15, 15, 24, 0.6) 10px, rgba(15, 15, 24, 0.6) 20px), rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    border-radius: 0.125rem;
+    color: #fff;
+    flex-direction: column;
+    max-width: 75ch;
+    padding: 1.5rem 1.75rem;
+}
+section.active {
+    display: block;
+}
+section strong {
+    font-weight: 700;
+}
+section > article {
+    text-align: left;
+}
+section h1 {
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 100;
+    margin-bottom: 0.35rem;
+}
+section h2 {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+section h3 {
+    text-transform: uppercase;
+    font-size: 1.15rem;
+    font-weight: 400;
+}
+#faqTitle,
+#downloadTitle,
+#communityTitle {
+    display: none;
+}
+section p,
+section li {
+    margin: 1.125rem 0;
+    line-height: 1.5rem;
+}
+section li {
+    list-style-type: "\01F538";
+    margin-left: 1.125rem;
+    padding-left: 0.25rem;
+}
+section a {
+    color: #ffc107;
+    text-decoration: none;
+    border-bottom: 1px solid #ffc107;
+}
+
+/*
+ * Footer
+ */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: repeating-linear-gradient(-45deg, rgba(12, 12, 19, 0.6), rgba(12, 12, 19, 0.6) 10px, rgba(15, 15, 24, 0.6) 10px, rgba(15, 15, 24, 0.6) 20px), rgba(0, 0, 0, 0.8);
+}
+footer p {
+    line-height: 1.5rem;
+}
+
+/*
+ * Button
+ */
+.btn {
+    display: inline-block;
+    color: #ffc107;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 0.125rem solid #ffc107;
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0.5rem 0 0.5rem;
+    font-size: 1.10rem;
+    cursor: pointer;
+    font-weight: 400;
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.5s;
+    box-sizing: content-box;
+}
+.btn:hover {
+    color: #000;
+}
+.btn::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0;
+    top: 0;
+    left: -4rem;
+    transform: skewX(45deg);
+    background-color: #ffc107;
+    z-index: -1;
+    transition: all 0.5s;
+}
+.btn:hover::before {
+    width: 160%;
+}
+
+/*
+ * MEDIA QUERIES
+ */
+@media (max-width: 946px) {
+    nav ul {
+        margin-top: 0.5rem;
+    }
+    nav li {
+        margin: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 931px) {
+    header h1,
+    nav {
+        width: 100%;
+    }
+}
+
+@media (max-width: 720px) {
+    section {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.5rem;
+    }
+    header h1 {
+        height: 40px;
+    }
+    nav li {
+        margin: 0.25rem 0.75rem;
+    }
+    .btn {
+        padding: 0.6rem 0.9rem;
+        font-size: 1rem;
+    }
+}
