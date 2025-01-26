@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
 
-    const navLinks = document.querySelectorAll('header nav a[href^="#"]');
+    const navLinks = document.querySelectorAll('header a[href^="#"]');
     navLinks.forEach(link => {
         link.addEventListener('click', event => {
             const targetHash = event.target.getAttribute('href');
