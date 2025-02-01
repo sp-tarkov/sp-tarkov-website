@@ -72,16 +72,37 @@
   font-weight: 500;
   letter-spacing: 0.3px;
   padding: 0.5rem 0.75rem;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  overflow: hidden;
+  border: 1px solid transparent;
 }
 
 .nav-link:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
+  color: #fff350;
+  background: rgba(255, 243, 80, 0.05);
+  transform: translateY(-1px);
+  border-color: rgba(255, 243, 80, 0.1);
+}
+
+.nav-link-underline {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.35rem;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 243, 80, 0) 0%, rgba(255, 243, 80, 0.3) 50%, rgba(255, 243, 80, 0) 100%);
+  opacity: 0;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover .nav-link-underline {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 /* Mobile Navigation */
@@ -96,27 +117,33 @@
   }
   
   .nav-link:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 243, 80, 0.05);
+    transform: scale(1.02);
+    border-color: rgba(255, 243, 80, 0.1);
+  }
+
+  .nav-link-underline {
+    display: none;
   }
 }
 
-/* Hero Styles */
+/* Button Styles */
 .btn-primary, .btn-secondary {
   @apply inline-flex items-center justify-center gap-2;
   @apply px-6 py-3 rounded-lg font-medium;
   @apply transition-all duration-300;
-  @apply border border-zinc-700/50;
+  @apply border border-[#fff350]/20;
 }
 
 .btn-primary {
-  @apply bg-zinc-800 text-zinc-100;
-  @apply hover:bg-zinc-700 hover:border-zinc-600;
-  @apply hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20;
+  @apply bg-zinc-900/90 text-[#fff350];
+  @apply hover:bg-zinc-800/90 hover:border-[#fff350]/50;
+  @apply hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#fff350]/10;
 }
 
 .btn-secondary {
   @apply bg-zinc-900/50 text-zinc-300;
-  @apply hover:bg-zinc-800/50 hover:text-zinc-100;
+  @apply hover:text-[#fff350] hover:border-[#fff350]/30;
   @apply hover:-translate-y-0.5;
 }
 
@@ -152,4 +179,37 @@ em {
 .animate-gradient {
   animation: gradient 8s ease infinite;
   background-size: 200% 200%;
+}
+
+/* 3D Card Effects */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }

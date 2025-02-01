@@ -3,6 +3,7 @@ import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
 import FAQ from './components/FAQ';
+import DiscordCTA from './components/DiscordCTA';
 import Footer from './components/Footer';
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <Hero />
         <About />
         <FAQ />
+        <DiscordCTA />
         <Footer />
       </div>
     </main>

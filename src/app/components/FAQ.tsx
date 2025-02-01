@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
+import DiscordCTA from './DiscordCTA';
 
 type FAQItem = {
   question: string;
@@ -10,19 +12,21 @@ type FAQItem = {
 const FAQAccordionItem = ({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boolean; onToggle: () => void }) => {
   return (
     <div className="group relative">
-      <div className="absolute inset-0 bg-gradient-to-r from-zinc-800/50 via-zinc-700/25 to-zinc-800/50 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500" />
+      {/* Hover glow effect */}
+      <div className="absolute inset-0 bg-[#fff350]/5 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-500" />
       
-      <div className="relative bg-gradient-to-br from-zinc-900/90 to-zinc-800/90 rounded-xl border border-zinc-700/50 group-hover:border-zinc-500/50 transition-all duration-300">
+      {/* Card container */}
+      <div className="relative bg-zinc-900/50 backdrop-blur-sm rounded-xl border border-[#fff350]/10 group-hover:border-[#fff350]/20 transition-all duration-300">
         <button
           onClick={onToggle}
           className="w-full text-left p-6 focus:outline-none"
         >
-          <div className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold text-zinc-200 group-hover:text-white transition-colors duration-300">
+          <div className="flex justify-between items-center gap-4">
+            <h3 className="text-lg font-semibold text-white group-hover:text-[#fff350] transition-colors duration-300">
               {item.question}
             </h3>
-            <div className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-              <svg className="w-5 h-5 text-zinc-400 group-hover:text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className={`flex-shrink-0 w-6 h-6 rounded-lg bg-zinc-900/80 border border-[#fff350]/20 group-hover:border-[#fff350]/40 flex items-center justify-center transition-all duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+              <svg className="w-4 h-4 text-[#fff350]/70 group-hover:text-[#fff350]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -30,13 +34,10 @@ const FAQAccordionItem = ({ item, isOpen, onToggle }: { item: FAQItem; isOpen: b
         </button>
         
         <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-          <div className="p-6 pt-0 text-zinc-400 text-sm leading-relaxed">
+          <div className="px-6 pb-6 text-zinc-400 text-sm leading-relaxed">
             {item.answer}
           </div>
         </div>
-
-        {/* Bottom accent line */}
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-zinc-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
     </div>
   );
@@ -70,20 +71,32 @@ const FAQ = () => {
 
   return (
     <section className="relative py-24">
+      {/* Background gradients */}
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/0 via-zinc-900/50 to-zinc-900/0" />
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-[#fff350]/20 rounded-full blur-[128px] -z-10" />
+      <div className="absolute top-40 -right-20 w-72 h-72 bg-[#fff350]/10 rounded-full blur-[128px] -z-10" />
+      <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-[#fff350]/5 rounded-full blur-[128px] -z-10" />
       
       <div className="container relative mx-auto px-4">
         <div className="max-w-3xl mx-auto">
+          {/* Section Title */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-zinc-100 mb-4">
-              Frequently Asked Questions
+            <div className="inline-flex items-center gap-4 mb-4">
+              <span className="text-sm uppercase tracking-wider text-[#fff350] font-medium">FAQ</span>
+              <div className="h-px w-12 bg-gradient-to-r from-[#fff350]/30 to-transparent" />
+            </div>
+            <h2 className="text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-[#fff350] via-yellow-100 to-[#fff350] bg-clip-text text-transparent animate-gradient">
+                Frequently Asked Questions
+              </span>
             </h2>
-            <p className="text-zinc-400 leading-relaxed">
+            <p className="text-zinc-300 leading-relaxed max-w-xl mx-auto">
               Got questions? We've got answers. If you can't find what you're looking for,
               join our community Discord for more help.
             </p>
           </div>
 
+          {/* FAQ Items */}
           <div className="space-y-4">
             {faqItems.map((item, index) => (
               <FAQAccordionItem
@@ -95,10 +108,11 @@ const FAQ = () => {
             ))}
           </div>
 
+          {/* View Full FAQ Link */}
           <div className="text-center mt-12">
             <a
               href="https://hub.sp-tarkov.com/faq/"
-              className="inline-flex items-center gap-2 text-zinc-400 hover:text-zinc-200 transition-colors duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-zinc-900/80 border border-[#fff350]/10 hover:border-[#fff350]/20 text-[#fff350]/70 hover:text-[#fff350] transition-all duration-300"
             >
               View Full FAQ
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
