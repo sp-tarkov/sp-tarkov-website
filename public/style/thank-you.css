@@ -63,15 +63,14 @@
 }
 
 .contributor {
-    padding: 0.75rem 1rem;
+    padding: 0;
     background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 255, 255, 0.05));
     border: 1px solid rgba(255, 193, 7, 0.2);
     border-radius: 0.25rem;
-    text-align: center;
-    font-weight: 400;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    height: 3rem;
 }
 
 .contributor::before {
@@ -93,6 +92,11 @@
 
 .contributor:hover::before {
     left: 100%;
+}
+
+/* Canvas styling */
+.contributor canvas {
+    display: block;
 }
 
 /* Section Divider */
@@ -200,8 +204,7 @@
     }
 
     .contributor {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.95rem;
+        height: 2.5rem;
     }
 }
 
@@ -225,8 +228,7 @@
     }
 
     .contributor {
-        padding: 0.5rem 0.6rem;
-        font-size: 0.9rem;
+        height: 2.25rem;
     }
 
     .thank-you-content .intro {

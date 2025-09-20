@@ -114,7 +114,7 @@
             ];
 
             const patreonSupporters = [
-                'PatreonSupporter1',
+                'PatreonSupporter1WithLongName',
                 'PatreonSupporter2',
                 'PatreonSupporter3',
                 'PatreonSupporter4',
@@ -134,23 +134,102 @@
                 return shuffled;
             }
 
+            function drawTextOnCanvas(canvas, text, isPatreon) {
+                const ctx = canvas.getContext('2d');
+                const dpr = window.devicePixelRatio || 1;
+
+                // Set canvas size accounting for device pixel ratio
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+
+                // Clear canvas
+                ctx.clearRect(0, 0, rect.width, rect.height);
+
+                // Set text properties
+                ctx.fillStyle = isPatreon ? '#ffc107' : '#ffffff';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                // Start with a base font size
+                let fontSize = 16;
+                ctx.font = `400 ${fontSize}px "Open Sans", sans-serif`;
+
+                // Measure text and scale down if needed
+                let textWidth = ctx.measureText(text).width;
+                const maxWidth = rect.width - 20; // Leave some padding
+
+                if (textWidth > maxWidth) {
+                    fontSize = fontSize * (maxWidth / textWidth);
+                    ctx.font = `400 ${fontSize}px "Open Sans", sans-serif`;
+                }
+
+                // Draw the text
+                ctx.fillText(text, rect.width / 2, rect.height / 2);
+            }
+
             function buildContributorHTML(names, containerId) {
                 const shuffled = shuffleArray(names);
                 const container = document.getElementById(containerId);
 
                 if (container) {
                     const isPatreon = containerId === 'patreon-grid';
-                    const html = shuffled.map(name => {
-                        const classes = isPatreon ? 'contributor patreon' : 'contributor';
-                        return `<div class="${classes}">${name}</div>`;
-                    }).join('');
-                    container.innerHTML = html;
+                    container.innerHTML = '';
+                    const canvases = [];
+
+                    shuffled.forEach((name) => {
+                        const div = document.createElement('div');
+                        div.className = isPatreon ? 'contributor patreon' : 'contributor';
+
+                        const canvas = document.createElement('canvas');
+                        canvas.style.width = '100%';
+                        canvas.style.height = '100%';
+                        canvas.setAttribute('data-name', name);
+                        canvas.setAttribute('data-patreon', isPatreon ? 'true' : 'false');
+
+                        div.appendChild(canvas);
+                        container.appendChild(div);
+                        canvases.push(canvas);
+                    });
+
+                    // Force layout calculation then draw
+                    container.offsetHeight; // Force reflow
+
+                    // Draw all canvases after layout is complete
+                    requestAnimationFrame(() => {
+                        canvases.forEach(canvas => {
+                            const name = canvas.getAttribute('data-name');
+                            const isPatreon = canvas.getAttribute('data-patreon') === 'true';
+                            drawTextOnCanvas(canvas, name, isPatreon);
+                        });
+                    });
                 }
+            }
+
+            function redrawAllCanvases() {
+                requestAnimationFrame(() => {
+                    document.querySelectorAll('canvas[data-name]').forEach(canvas => {
+                        const name = canvas.getAttribute('data-name');
+                        const isPatreon = canvas.getAttribute('data-patreon') === 'true';
+                        drawTextOnCanvas(canvas, name, isPatreon);
+                    });
+                });
             }
 
             window.addEventListener('DOMContentLoaded', () => {
                 buildContributorHTML(contributors, 'contributors-grid');
                 buildContributorHTML(patreonSupporters, 'patreon-grid');
+
+                // Also redraw when all resources are loaded
+                window.addEventListener('load', redrawAllCanvases);
+
+                // Redraw on window resize
+                let resizeTimeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(redrawAllCanvases, 250);
+                });
             });
         </script>
     </body>
