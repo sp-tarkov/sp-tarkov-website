@@ -19,6 +19,8 @@
 
         <link media="all" rel="stylesheet" href="/style/main.css" />
         <link media="all" rel="stylesheet" href="/style/thank-you.css" />
+
+        <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     </head>
     <body>
         <div class="video-wrapper" aria-hidden="true">
@@ -181,6 +183,7 @@
                     shuffled.forEach((name) => {
                         const div = document.createElement('div');
                         div.className = isPatreon ? 'contributor patreon' : 'contributor';
+                        div.style.cursor = 'pointer';
 
                         const canvas = document.createElement('canvas');
                         canvas.style.width = '100%';
@@ -191,6 +194,55 @@
                         div.appendChild(canvas);
                         container.appendChild(div);
                         canvases.push(canvas);
+
+                        // Add click handler
+                        div.addEventListener('click', (e) => {
+                            // Get button position for confetti origin
+                            const rect = div.getBoundingClientRect();
+                            const x = (rect.left + rect.width / 2) / window.innerWidth;
+                            const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+                            if (isPatreon) {
+                                // Subscriber confetti effect
+                                const defaults = {
+                                    spread: 360,
+                                    ticks: 50,
+                                    gravity: 0,
+                                    decay: 0.94,
+                                    startVelocity: 30,
+                                    shapes: ["star"],
+                                    colors: ["FFE400", "FFBD00", "E89400", "FFCA6C", "FDFFB8"],
+                                    origin: { x: x, y: y }
+                                };
+
+                                function shoot() {
+                                    confetti({
+                                        ...defaults,
+                                        particleCount: 40,
+                                        scalar: 1.2,
+                                        shapes: ["star"],
+                                    });
+
+                                    confetti({
+                                        ...defaults,
+                                        particleCount: 10,
+                                        scalar: 0.75,
+                                        shapes: ["circle"],
+                                    });
+                                }
+
+                                setTimeout(shoot, 0);
+                                setTimeout(shoot, 100);
+                                setTimeout(shoot, 200);
+                            } else {
+                                // Regular contributor confetti
+                                confetti({
+                                    particleCount: 100,
+                                    spread: 70,
+                                    origin: { x: x, y: y }
+                                });
+                            }
+                        });
                     });
 
                     // Force layout calculation then draw
