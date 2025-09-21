@@ -116,15 +116,9 @@
             ];
 
             const patreonSupporters = [
-                'PatreonSupporter1WithLongName',
-                'PatreonSupporter2',
-                'PatreonSupporter3',
-                'PatreonSupporter4',
-                'PatreonSupporter5',
-                'PatreonSupporter6',
-                'PatreonSupporter7',
-                'PatreonSupporter8',
-                'PatreonSupporter9'
+                'Refringe',
+                'Bepis',
+                'John Thicc',
             ];
 
             function shuffleArray(array) {
@@ -160,7 +154,7 @@
 
                 // Measure text and scale down if needed
                 let textWidth = ctx.measureText(text).width;
-                const maxWidth = rect.width - 20; // Leave some padding
+                const maxWidth = rect.width - 20;
 
                 if (textWidth > maxWidth) {
                     fontSize = fontSize * (maxWidth / textWidth);
@@ -195,7 +189,6 @@
                         container.appendChild(div);
                         canvases.push(canvas);
 
-                        // Add click handler
                         div.addEventListener('click', (e) => {
                             // Get button position for confetti origin
                             const rect = div.getBoundingClientRect();
@@ -203,7 +196,6 @@
                             const y = (rect.top + rect.height / 2) / window.innerHeight;
 
                             if (isPatreon) {
-                                // Subscriber confetti effect
                                 const defaults = {
                                     spread: 360,
                                     ticks: 50,
@@ -235,7 +227,6 @@
                                 setTimeout(shoot, 100);
                                 setTimeout(shoot, 200);
                             } else {
-                                // Regular contributor confetti
                                 confetti({
                                     particleCount: 100,
                                     spread: 70,
@@ -246,7 +237,7 @@
                     });
 
                     // Force layout calculation then draw
-                    container.offsetHeight; // Force reflow
+                    container.offsetHeight;
 
                     // Draw all canvases after layout is complete
                     requestAnimationFrame(() => {
@@ -279,7 +270,6 @@
                         video.pause();
                         video.removeAttribute('autoplay');
                         video.style.display = 'none';
-                        // Keep the wrapper and overlay for background color
                         videoWrapper.style.backgroundColor = '#000000';
                     }
                 }
@@ -290,10 +280,8 @@
                 buildContributorHTML(contributors, 'contributors-grid');
                 buildContributorHTML(patreonSupporters, 'patreon-grid');
 
-                // Also redraw when all resources are loaded
                 window.addEventListener('load', redrawAllCanvases);
 
-                // Redraw on window resize
                 let resizeTimeout;
                 window.addEventListener('resize', () => {
                     clearTimeout(resizeTimeout);
