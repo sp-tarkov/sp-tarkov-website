@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex, nofollow">
+
+        <title>Thank You - Single Player Tarkov - Version 4 Contributors</title>
+        <meta name="description" content="Thank you to all the amazing contributors who made Single Player Tarkov Version 4 possible.">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <link media="all" rel="stylesheet" href="/style/main.css" />
+        <link media="all" rel="stylesheet" href="/style/thank-you.css" />
+
+        <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+    </head>
+    <body>
+        <div class="video-wrapper" aria-hidden="true">
+            <video id="background-video" autoplay muted loop playsinline>
+                <source src="https://static.sp-tarkov.com/background.mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+
+        <header role="banner" class="thank-you-header">
+            <h1><a href="/" title="Single Player Tarkov">Single Player Tarkov</a></h1>
+        </header>
+
+        <main role="main" class="thank-you-main">
+            <section class="active thank-you-section">
+                <h1>Thank You</h1>
+                <h2>Version 4 Contributors</h2>
+                <article class="thank-you-content">
+                    <p class="intro">The release of Single Player Tarkov Version 4 would not have been possible without the incredible dedication, talent, and passion of our amazing community. From core developers to modders, testers to documentation writers, each person listed here has contributed to making SPT what it is today.</p>
+
+                    <p class="intro">To everyone who spent countless hours debugging, coding, testing, and supporting the project, this is for you. Your work has transformed the way thousands experience Tarkov, and we are forever grateful.</p>
+
+                    <div class="contributors-grid" id="contributors-grid">
+                    </div>
+
+                    <p class="closing">Every commit, every bug report, every line of code, and every moment of support has shaped this project. You are the heart of Single Player Tarkov.</p>
+
+                    <h3 class="section-divider">Patreon Supporters</h3>
+                    <p class="intro">A special thank you to our generous Patreon supporters whose financial contributions have helped sustain and grow the SPT project. Your support enables us to maintain infrastructure, develop new features, and keep this project alive for everyone to enjoy.</p>
+
+                    <p class="disclaimer">The following list includes supporters who opted to be publicly recognized. To all our supporters not listed here, whether by choice or oversight, please know that your contributions are equally valued and deeply appreciated. Every single patron, visible or not, makes this project possible. ♥️</p>
+
+                    <div class="contributors-grid patreon-grid" id="patreon-grid">
+                    </div>
+
+                    <p class="signature">With deepest gratitude,<br>The SPT Team</p>
+
+                    <!-- And to all the haters: ligma. -->
+                </article>
+            </section>
+        </main>
+
+        <footer role="contentinfo">
+            <p>The <abbr title="Single Player Tarkov">SPT</abbr> project is not affiliated with Battlestate Games Ltd. in any way. All trademarks are property of their respective owners.</p>
+        </footer>
+
+        <script>
+            const contributors = [
+                '5o2',
+                'AdmiralAwsum',
+                'Angel-git',
+                'ArchangelWTF',
+                'BrotherVeren',
+                'CameronW1',
+                'CJ',
+                'Clodan',
+                'CP89',
+                'CWX',
+                'DanW',
+                'devmaximum',
+                'Doup22',
+                'DrakiaXYZ',
+                'fearthedje',
+                'GentlemenSausage',
+                'Guidot42',
+                'HB53',
+                'Hulkhan22',
+                'January',
+                'Kaeno',
+                'Lacyway',
+                'Muramas',
+                'nailz420',
+                'Parataku',
+                'ParanoiaBruce',
+                'PhantomInTime',
+                'qe201020335',
+                'R3ality',
+                'Razzmatazz',
+                'Redbeard',
+                'Refringe',
+                'ShadowXtrex',
+                'Shibdib',
+                'Stealthsuit',
+                'studentchy',
+                'Tetris',
+                'Th3NightHawk',
+                'TheHeadPhonesGuy',
+                'ThyMuffinMan',
+                'ultragastro',
+                'Valens',
+                'XeonDead',
+                'yurikus'
+            ];
+
+            const patreonSupporters = [
+                'Refringe',
+                'DrakiaXYZ',
+                'Tron',
+                'Bepis',
+                'John Thicc',
+                'Cardsmen',
+                'Nexstat',
+                'NumberedJester',
+                'Irabeth Tyrabade',
+                'DanW',
+                'Grampa Teems',
+                'Geoffrey'
+            ];
+
+            function shuffleArray(array) {
+                const shuffled = [...array];
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                return shuffled;
+            }
+
+            function drawTextOnCanvas(canvas, text, isPatreon) {
+                const ctx = canvas.getContext('2d');
+                const dpr = window.devicePixelRatio || 1;
+
+                // Set canvas size accounting for device pixel ratio
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+
+                // Clear canvas
+                ctx.clearRect(0, 0, rect.width, rect.height);
+
+                // Set text properties
+                ctx.fillStyle = isPatreon ? '#ffc107' : '#ffffff';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                // Start with a base font size
+                let fontSize = 16;
+                ctx.font = `400 ${fontSize}px "Open Sans", sans-serif`;
+
+                // Measure text and scale down if needed
+                let textWidth = ctx.measureText(text).width;
+                const maxWidth = rect.width - 20;
+
+                if (textWidth > maxWidth) {
+                    fontSize = fontSize * (maxWidth / textWidth);
+                    ctx.font = `400 ${fontSize}px "Open Sans", sans-serif`;
+                }
+
+                // Draw the text
+                ctx.fillText(text, rect.width / 2, rect.height / 2);
+            }
+
+            function buildContributorHTML(names, containerId) {
+                const shuffled = shuffleArray(names);
+                const container = document.getElementById(containerId);
+
+                if (container) {
+                    const isPatreon = containerId === 'patreon-grid';
+                    container.innerHTML = '';
+                    const canvases = [];
+
+                    shuffled.forEach((name) => {
+                        const div = document.createElement('div');
+                        div.className = isPatreon ? 'contributor patreon' : 'contributor';
+                        div.style.cursor = 'pointer';
+
+                        const canvas = document.createElement('canvas');
+                        canvas.style.width = '100%';
+                        canvas.style.height = '100%';
+                        canvas.setAttribute('data-name', name);
+                        canvas.setAttribute('data-patreon', isPatreon ? 'true' : 'false');
+
+                        div.appendChild(canvas);
+                        container.appendChild(div);
+                        canvases.push(canvas);
+
+                        div.addEventListener('click', (e) => {
+                            // Get button position for confetti origin
+                            const rect = div.getBoundingClientRect();
+                            const x = (rect.left + rect.width / 2) / window.innerWidth;
+                            const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+                            if (isPatreon) {
+                                const defaults = {
+                                    spread: 360,
+                                    ticks: 50,
+                                    gravity: 0,
+                                    decay: 0.94,
+                                    startVelocity: 30,
+                                    shapes: ["star"],
+                                    colors: ["FFE400", "FFBD00", "E89400", "FFCA6C", "FDFFB8"],
+                                    origin: { x: x, y: y }
+                                };
+
+                                function shoot() {
+                                    confetti({
+                                        ...defaults,
+                                        particleCount: 40,
+                                        scalar: 1.2,
+                                        shapes: ["star"],
+                                    });
+
+                                    confetti({
+                                        ...defaults,
+                                        particleCount: 10,
+                                        scalar: 0.75,
+                                        shapes: ["circle"],
+                                    });
+                                }
+
+                                setTimeout(shoot, 0);
+                                setTimeout(shoot, 100);
+                                setTimeout(shoot, 200);
+                            } else {
+                                confetti({
+                                    particleCount: 100,
+                                    spread: 70,
+                                    origin: { x: x, y: y }
+                                });
+                            }
+                        });
+                    });
+
+                    // Force layout calculation then draw
+                    container.offsetHeight;
+
+                    // Draw all canvases after layout is complete
+                    requestAnimationFrame(() => {
+                        canvases.forEach(canvas => {
+                            const name = canvas.getAttribute('data-name');
+                            const isPatreon = canvas.getAttribute('data-patreon') === 'true';
+                            drawTextOnCanvas(canvas, name, isPatreon);
+                        });
+                    });
+                }
+            }
+
+            function redrawAllCanvases() {
+                requestAnimationFrame(() => {
+                    document.querySelectorAll('canvas[data-name]').forEach(canvas => {
+                        const name = canvas.getAttribute('data-name');
+                        const isPatreon = canvas.getAttribute('data-patreon') === 'true';
+                        drawTextOnCanvas(canvas, name, isPatreon);
+                    });
+                });
+            }
+
+            // Prevent video playback on mobile devices
+            function handleMobileVideo() {
+                const video = document.getElementById('background-video');
+                const videoWrapper = document.querySelector('.video-wrapper');
+                if (video && videoWrapper) {
+                    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+                    if (isMobile) {
+                        video.pause();
+                        video.removeAttribute('autoplay');
+                        video.style.display = 'none';
+                        videoWrapper.style.backgroundColor = '#000000';
+                    }
+                }
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                handleMobileVideo();
+                buildContributorHTML(contributors, 'contributors-grid');
+                buildContributorHTML(patreonSupporters, 'patreon-grid');
+
+                window.addEventListener('load', redrawAllCanvases);
+
+                let resizeTimeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        redrawAllCanvases();
+                        handleMobileVideo();
+                    }, 250);
+                });
+            });
+        </script>
+    </body>
+</html>
